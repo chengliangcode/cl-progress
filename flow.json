@@ -1,0 +1,44 @@
+[
+  {
+    "nodeId": 1,
+    "type": "start",
+    "name": "开始",
+    "out": 2
+  },
+  {
+    "nodeId": 2,
+    "type": "user",
+    "name": "用户审批节点",
+    "in": 1,
+    "out": 3,
+    "context": {
+      "user": "CL"
+    }
+  },
+  {
+    "nodeId": 3,
+    "type": "user",
+    "name": "用户审批节点",
+    "in": 2,
+    "out": 4,
+    "context": {
+      "user": "ZZJ"
+    }
+  },
+  {
+    "nodeId": 4,
+    "type": "message",
+    "name": "抄送节点",
+    "in": 3,
+    "out": -1,
+    "context": {
+      "user": "ZCR"
+    }
+  },
+  {
+    "nodeId": -1,
+    "type": "end",
+    "name": "结束",
+    "in": 4
+  }
+]
