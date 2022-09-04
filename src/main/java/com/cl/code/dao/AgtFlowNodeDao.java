@@ -1,16 +1,15 @@
 package com.cl.code.dao;
 
-import com.cl.code.model.AgtFlow;
+import com.cl.code.model.AgtFlowNode;
 import tk.mybatis.mapper.common.Mapper;
 
 /**
- * Dao 接口
+ *  Dao 接口
  *
  * @author chengliang
- * @date 2022-09-02
+ * @since 2022-09-03
  */
 @org.apache.ibatis.annotations.Mapper
-public interface AgtFlowDao extends Mapper<AgtFlow> {
+public interface AgtFlowNodeDao extends Mapper<AgtFlowNode> {
 
-    
 }

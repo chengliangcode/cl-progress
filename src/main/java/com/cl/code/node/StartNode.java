@@ -15,7 +15,7 @@ public class StartNode extends FlowNode {
     }
 
     public Long execute(Long flowId, Flow flow) {
-        return super.getOut();
+        return super.getOutput();
     }
 
 }

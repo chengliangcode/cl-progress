@@ -3,10 +3,7 @@ package com.cl.code.node;
 import com.alibaba.fastjson.JSONObject;
 import com.cl.code.Flow;
 import com.cl.code.FlowNode;
-import com.cl.code.dao.AgtFlowDao;
-import com.cl.code.pojo.po.AgtFlow;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,12 +22,9 @@ public class UserNode extends FlowNode {
         Map<String, Object> context = super.getContext();
         // 推送任务 回调
         String approvalUserName = (String) context.get(USER);
-        // 保存流程当前进度
-        AgtFlowDao agtFlowDao = flow.getAgtFlowDao();
 
-        List<AgtFlow> agtFlows = agtFlowDao.selectAll();
         // 监听
-        return super.getOut();
+        return super.getOutput();
     }
 
 }

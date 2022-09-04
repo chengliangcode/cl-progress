@@ -16,6 +16,6 @@ public class MessageNode extends FlowNode {
 
     @Override
     public Long execute(Long flowId, Flow flow) {
-        return super.getOut();
+        return super.getOutput();
     }
 }

@@ -32,7 +32,7 @@ public class ProgressMain {
             throw new RuntimeException(e);
         }
 
-        Flow flow = FlowEngine.buildFlow(json, context);
+        Flow flow = FlowEngine.buildFlow(json);
         flow.execute();
 
         // 流程 保存

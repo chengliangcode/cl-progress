@@ -28,9 +28,9 @@ public abstract class FlowNode implements Task {
      */
     private String name;
 
-    private Long in;
+    private Long input;
 
-    private Long out;
+    private Long output;
 
     private Map<String, Object> context;
 
@@ -38,8 +38,8 @@ public abstract class FlowNode implements Task {
         this.nodeId = jsonObject.getLong("nodeId");
         this.type = FlowTypeEnum.valueOf(jsonObject.getString("type").toUpperCase());
         this.name = jsonObject.getString("name");
-        this.in = jsonObject.getLong("in");
-        this.out = jsonObject.getLong("out");
+        this.input = jsonObject.getLong("input");
+        this.output = jsonObject.getLong("output");
         this.context = (Map<String, Object>) jsonObject.get("context");
     }
 }

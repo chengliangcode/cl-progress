@@ -1,6 +1,6 @@
 package com.cl.code.dao;
 
-import com.cl.code.model.AgtFlow;
+import com.cl.code.model.AgtFlowRecord;
 import tk.mybatis.mapper.common.Mapper;
 
 /**
@@ -10,7 +10,6 @@ import tk.mybatis.mapper.common.Mapper;
  * @date 2022-09-02
  */
 @org.apache.ibatis.annotations.Mapper
-public interface AgtFlowDao extends Mapper<AgtFlow> {
+public interface AgtFlowRecordDao extends Mapper<AgtFlowRecord> {
 
-    
 }

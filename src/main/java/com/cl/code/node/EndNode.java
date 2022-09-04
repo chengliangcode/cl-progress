@@ -15,7 +15,6 @@ public class EndNode extends FlowNode {
     }
 
     public Long execute(Long flowId, Flow flow) {
-        System.out.println("结束");
         return null;
     }
 

@@ -1,4 +1,4 @@
-package com.cl.code.pojo.po;
+package com.cl.code.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * 
- *
  * @author chengliang
  * @date 2022-09-02
  */
@@ -39,4 +37,13 @@ public class AgtFlow {
 
     public static final String FLOW_JSON = "flowJson";
 
+
+    public AgtFlow() {
+    }
+
+    public AgtFlow(Long flowId, String flowJson) {
+        this.flowId = flowId;
+        this.flowJson = flowJson;
+    }
+    
 }
