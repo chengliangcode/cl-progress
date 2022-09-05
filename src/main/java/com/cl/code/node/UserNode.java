@@ -1,8 +1,7 @@
 package com.cl.code.node;
 
 import com.alibaba.fastjson.JSONObject;
-import com.cl.code.Flow;
-import com.cl.code.FlowNode;
+import com.cl.code.NodeDefinition;
 
 import java.util.Map;
 
@@ -10,21 +9,19 @@ import java.util.Map;
  * @author chengliang
  * @date 2022/8/31 15:53
  */
-public class UserNode extends FlowNode {
+public class UserNode extends OperationTaskNode {
 
     private static final String USER = "user";
 
-    public UserNode(JSONObject jsonObject) {
-        super(jsonObject);
+    public UserNode(NodeDefinition nodeDefinition) {
+        super(nodeDefinition);
     }
 
-    public Long execute(Long flowId, Flow flow) {
+    @Override
+    public void operationTask(Long flowId) {
         Map<String, Object> context = super.getContext();
         // 推送任务 回调
         String approvalUserName = (String) context.get(USER);
-
         // 监听
-        return super.getOutput();
     }
-
 }

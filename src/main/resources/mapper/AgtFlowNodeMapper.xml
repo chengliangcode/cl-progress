@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cl.code.dao.AgtFlowNodeDao">
-    
+
+    <insert id="batchInsert">
+        INSERT INTO `agt_flow_node`(`node_id`, `flow_id`, `input`, `output`, `type`, `name`, `context`)
+        VALUES
+        <foreach collection="agtFlowNodeList" item="item" separator=",">
+            (#{item.nodeId},#{item.flowId},#{item.input},#{item.output},#{item.type},#{item.name},#{item.context})
+        </foreach>
+    </insert>
+
 </mapper>

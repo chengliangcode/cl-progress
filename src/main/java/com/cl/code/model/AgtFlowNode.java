@@ -1,5 +1,7 @@
 package com.cl.code.model;
 
+import com.alibaba.fastjson.JSON;
+import com.cl.code.NodeDefinition;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -54,5 +56,16 @@ public class AgtFlowNode {
         this.name = name;
         this.context = context;
     }
+
+    public AgtFlowNode(Long flowId, NodeDefinition nodeDefinition) {
+        this.nodeId = nodeDefinition.getNodeId();
+        this.flowId = flowId;
+        this.input = nodeDefinition.getInput();
+        this.output = nodeDefinition.getOutput();
+        this.type = nodeDefinition.getType();
+        this.name = nodeDefinition.getName();
+        this.context = JSON.toJSONString(nodeDefinition.getContext());
+    }
+
 
 }

@@ -1,18 +1,18 @@
 package com.cl.code;
 
 /**
+ * 任务
+ *
  * @author chengliang
- * @date 2022/9/1 10:48
+ * @date 2022/9/5 10:51
  */
 public interface Task {
 
     /**
-     * 执行
+     * 任务
      *
      * @param flowId 流id
-     * @param flow flow
-     * @return {@code Long}
      */
-    Long execute(Long flowId, Flow flow);
+    void task(Long flowId);
 
 }

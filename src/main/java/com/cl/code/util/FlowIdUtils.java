@@ -6,7 +6,7 @@ package com.cl.code.util;
  * @author raojing
  * @date 2020/4/8 17:13
  */
-public class TwiterIdUtil {
+public class FlowIdUtils {
 
     private static int node = 1;
     public static final int NODE_SHIFT = 5;
@@ -23,7 +23,7 @@ public class TwiterIdUtil {
         long currentTime = System.currentTimeMillis();
         long counter;
 
-        synchronized (TwiterIdUtil.class) {
+        synchronized (FlowIdUtils.class) {
 
             if (currentTime < referenceTime) {
                 throw new RuntimeException(String.format("Last referenceTime %s is after reference time %s", referenceTime, currentTime));

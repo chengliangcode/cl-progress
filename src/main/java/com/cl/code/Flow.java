@@ -1,18 +1,13 @@
 package com.cl.code;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.cl.code.constant.FlowTypeEnum;
-import com.cl.code.dao.AgtFlowRecordDao;
-import com.cl.code.model.AgtFlowRecord;
-import com.cl.code.node.EndNode;
-import com.cl.code.node.MessageNode;
-import com.cl.code.node.StartNode;
-import com.cl.code.node.UserNode;
-import com.cl.code.util.TwiterIdUtil;
+import com.cl.code.util.FlowBuildUtils;
 import lombok.AllArgsConstructor;
 
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * @author chengliang
@@ -26,7 +21,12 @@ public class Flow {
 
     private final Long flowId;
 
-    private final Map<Long, String> flowNodeMap;
+    private final Map<Long, NodeDefinition> flowNodeMap;
+
+    public Flow(Long flowId, List<NodeDefinition> flowNodeList) {
+        this.flowId = flowId;
+        this.flowNodeMap = flowNodeList.stream().collect(Collectors.toMap(NodeDefinition::getNodeId, Function.identity(), (k1, k2) -> k1, LinkedHashMap::new));
+    }
 
     public void execute() {
         // start
@@ -46,27 +46,11 @@ public class Flow {
     }
 
     private FlowNode getNode(Long nodeId) {
-        String flowNodeJson = flowNodeMap.get(nodeId);
-        JSONObject item = JSON.parseObject(flowNodeJson);
-        FlowTypeEnum type = FlowTypeEnum.valueOf(item.getObject("type", String.class).toUpperCase());
-        switch (type) {
-            case START:
-                return new StartNode(item);
-            case END:
-                return new EndNode(item);
-            case USER:
-                return new UserNode(item);
-            case MESSAGE:
-                return new MessageNode(item);
-            default:
-                throw new RuntimeException("存在不支持的节点类型");
-        }
+        return FlowBuildUtils.buildNode(flowNodeMap.get(nodeId));
     }
 
     private Long executeNode(FlowNode flowNode) {
         // TODO 记录执行
-        AgtFlowRecordDao agtFlowRecordDao = FlowEngine.agtFlowRecordDao;
-        agtFlowRecordDao.insert(new AgtFlowRecord(TwiterIdUtil.getTwiterId(), flowId, flowNode.getNodeId(), System.currentTimeMillis()));
         return flowNode.execute(flowId, this);
     }
 

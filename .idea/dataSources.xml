@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="MySQL" uuid="d674b63c-0b35-49ba-b25f-176269489fe8">
+    <data-source source="LOCAL" name="progress@116.205.188.28" uuid="d674b63c-0b35-49ba-b25f-176269489fe8">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://:3306</jdbc-url>
+      <jdbc-url>jdbc:mysql://116.205.188.28:3306/progress?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

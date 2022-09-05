@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -26,24 +25,12 @@ public class AgtFlow {
     @Id
     private Long flowId;
 
-    /**
-     * 流程json
-     */
-    @Column(name = "flow_json")
-    private String flowJson;
-
-
     public static final String FLOW_ID = "flowId";
-
-    public static final String FLOW_JSON = "flowJson";
-
 
     public AgtFlow() {
     }
 
-    public AgtFlow(Long flowId, String flowJson) {
+    public AgtFlow(Long flowId) {
         this.flowId = flowId;
-        this.flowJson = flowJson;
     }
-    
 }

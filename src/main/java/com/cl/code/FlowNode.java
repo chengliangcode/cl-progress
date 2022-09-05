@@ -1,6 +1,5 @@
 package com.cl.code;
 
-import com.alibaba.fastjson.JSONObject;
 import com.cl.code.constant.FlowTypeEnum;
 import lombok.Data;
 
@@ -11,7 +10,7 @@ import java.util.Map;
  * @date 2022/8/31 12:00
  */
 @Data
-public abstract class FlowNode implements Task {
+public abstract class FlowNode implements Node {
 
     /**
      * 节点id
@@ -34,12 +33,13 @@ public abstract class FlowNode implements Task {
 
     private Map<String, Object> context;
 
-    public FlowNode(JSONObject jsonObject) {
-        this.nodeId = jsonObject.getLong("nodeId");
-        this.type = FlowTypeEnum.valueOf(jsonObject.getString("type").toUpperCase());
-        this.name = jsonObject.getString("name");
-        this.input = jsonObject.getLong("input");
-        this.output = jsonObject.getLong("output");
-        this.context = (Map<String, Object>) jsonObject.get("context");
+    public FlowNode(NodeDefinition nodeDefinition) {
+        this.nodeId = nodeDefinition.getNodeId();
+        this.type = FlowTypeEnum.valueOf(nodeDefinition.getType().toUpperCase());
+        this.name = nodeDefinition.getName();
+        this.input = nodeDefinition.getInput();
+        this.output = nodeDefinition.getOutput();
+        this.context = nodeDefinition.getContext();
     }
+
 }

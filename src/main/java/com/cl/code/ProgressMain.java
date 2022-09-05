@@ -1,9 +1,15 @@
 package com.cl.code;
 
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -15,7 +21,6 @@ import java.nio.file.Paths;
  */
 @SpringBootApplication
 public class ProgressMain {
-
 
     public static void main(String[] args) {
         ConfigurableApplicationContext context = SpringApplication.run(ProgressMain.class, args);
@@ -32,9 +37,8 @@ public class ProgressMain {
             throw new RuntimeException(e);
         }
 
-        Flow flow = FlowEngine.buildFlow(json);
+        Flow flow = FlowEngine.getFlowEngine().getFlowService().buildFlow(json);
         flow.execute();
-
         // 流程 保存
 
     }

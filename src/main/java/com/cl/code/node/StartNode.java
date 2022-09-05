@@ -1,8 +1,8 @@
 package com.cl.code.node;
 
-import com.alibaba.fastjson.JSONObject;
 import com.cl.code.Flow;
 import com.cl.code.FlowNode;
+import com.cl.code.NodeDefinition;
 
 /**
  * @author chengliang
@@ -10,8 +10,8 @@ import com.cl.code.FlowNode;
  */
 public class StartNode extends FlowNode {
 
-    public StartNode(JSONObject jsonObject) {
-        super(jsonObject);
+    public StartNode(NodeDefinition nodeDefinition) {
+        super(nodeDefinition);
     }
 
     public Long execute(Long flowId, Flow flow) {

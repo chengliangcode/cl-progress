@@ -1,21 +1,22 @@
 package com.cl.code.node;
 
 import com.alibaba.fastjson.JSONObject;
-import com.cl.code.Flow;
-import com.cl.code.FlowNode;
+import com.cl.code.NodeDefinition;
 
 /**
  * @author chengliang
  * @date 2022/9/1 11:27
  */
-public class MessageNode extends FlowNode {
+public class MessageNode extends AutoTaskNode {
 
-    public MessageNode(JSONObject jsonObject) {
-        super(jsonObject);
+    public MessageNode(NodeDefinition nodeDefinition) {
+        super(nodeDefinition);
     }
 
     @Override
-    public Long execute(Long flowId, Flow flow) {
-        return super.getOutput();
+    public void autoTask() {
+        // 发送消息
+
     }
+
 }
