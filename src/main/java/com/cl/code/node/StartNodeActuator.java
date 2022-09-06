@@ -10,7 +10,6 @@ import com.cl.code.NodeDefinition;
  */
 public class StartNodeActuator extends FlowNodeActuator {
 
-
     public Long execute(NodeDefinition nodeDefinition, Flow flow) {
         // 记录发起人
         return nodeDefinition.getOutput();

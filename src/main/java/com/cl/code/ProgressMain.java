@@ -1,15 +1,10 @@
 package com.cl.code;
 
-import org.mybatis.spring.SqlSessionFactoryBean;
+import com.cl.code.node.UserNodeActuator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.core.io.support.ResourcePatternResolver;
 
-import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -37,8 +32,12 @@ public class ProgressMain {
             throw new RuntimeException(e);
         }
 
+        UserNodeActuator bean = context.getBean(UserNodeActuator.class);
+        System.out.println(bean);
+
         Flow flow = FlowEngine.getFlowEngine().getFlowService().buildFlow(json);
         flow.execute();
+
         // 流程 保存
 
     }
