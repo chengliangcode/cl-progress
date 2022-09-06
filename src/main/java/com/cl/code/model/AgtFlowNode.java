@@ -64,7 +64,7 @@ public class AgtFlowNode {
         this.output = nodeDefinition.getOutput();
         this.type = nodeDefinition.getType();
         this.name = nodeDefinition.getName();
-        this.context = JSON.toJSONString(nodeDefinition.getContext());
+        this.context = JSON.toJSONString(nodeDefinition.getProperties());
     }
 
 

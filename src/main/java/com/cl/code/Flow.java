@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 public class Flow {
 
     public static final Long START_NODE_ID = 1L;
+
     public static final Long END_NODE_ID = -1L;
 
     private final Long flowId;
@@ -30,28 +31,33 @@ public class Flow {
 
     public void execute() {
         // start
-        FlowNode start = getNode(START_NODE_ID);
-        Long next = executeNode(start);
+        NodeDefinition start = getNode(START_NODE_ID);
+        NodeDefinition nodeDefinition = executeNode(start);
+
         // loop
-        FlowNode end = loop(getNode(next));
+        NodeDefinition end = loop(nodeDefinition);
+
         // end
         executeNode(end);
+
     }
 
-    private FlowNode loop(FlowNode flowNode) {
-        if (flowNode.getNodeId().equals(END_NODE_ID)) {
-            return flowNode;
+    private NodeDefinition loop(NodeDefinition nodeDefinition) {
+        if (END_NODE_ID.equals(nodeDefinition.getNodeId())) {
+            return getNode(END_NODE_ID);
         }
-        return loop(getNode(executeNode(flowNode)));
+        return loop(executeNode(nodeDefinition));
     }
 
-    private FlowNode getNode(Long nodeId) {
-        return FlowBuildUtils.buildNode(flowNodeMap.get(nodeId));
+    private NodeDefinition getNode(Long nodeId) {
+        return flowNodeMap.get(nodeId);
     }
 
-    private Long executeNode(FlowNode flowNode) {
+    private NodeDefinition executeNode(NodeDefinition nodeDefinition) {
+        NodeActuator actuator = FlowBuildUtils.findActuator(nodeDefinition);
         // TODO 记录执行
-        return flowNode.execute(flowId, this);
+        Long next = actuator.execute(nodeDefinition, this);
+        return getNode(next);
     }
 
 }

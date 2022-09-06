@@ -39,6 +39,6 @@ public class NodeDefinition {
     /**
      * 上下文
      */
-    private Map<String, Object> context;
+    private Map<String, Object> properties;
 
 }

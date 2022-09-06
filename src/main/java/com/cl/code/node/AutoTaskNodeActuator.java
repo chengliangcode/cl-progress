@@ -1,6 +1,5 @@
 package com.cl.code.node;
 
-import com.alibaba.fastjson.JSONObject;
 import com.cl.code.NodeDefinition;
 
 /**
@@ -9,14 +8,10 @@ import com.cl.code.NodeDefinition;
  * @author chengliang
  * @date 2022/9/5 10:43
  */
-public abstract class AutoTaskNode extends TaskNode {
-
-    public AutoTaskNode(NodeDefinition nodeDefinition) {
-        super(nodeDefinition);
-    }
+public abstract class AutoTaskNodeActuator extends TaskNodeActuator {
 
     @Override
-    public void task(Long flowId) {
+    public void task(NodeDefinition nodeDefinition) {
 
     }
 

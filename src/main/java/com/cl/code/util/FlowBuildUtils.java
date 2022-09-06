@@ -1,13 +1,13 @@
 package com.cl.code.util;
 
 import com.alibaba.fastjson.JSON;
-import com.cl.code.FlowNode;
+import com.cl.code.NodeActuator;
 import com.cl.code.NodeDefinition;
 import com.cl.code.constant.FlowTypeEnum;
-import com.cl.code.node.EndNode;
-import com.cl.code.node.MessageNode;
-import com.cl.code.node.StartNode;
-import com.cl.code.node.UserNode;
+import com.cl.code.node.EndNodeActuator;
+import com.cl.code.node.MessageNodeActuator;
+import com.cl.code.node.StartNodeActuator;
+import com.cl.code.node.UserNodeActuator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.StringUtils;
 
@@ -44,16 +44,16 @@ public class FlowBuildUtils {
         }
     }
 
-    public static FlowNode buildNode(NodeDefinition nodeDefinition){
+    public static NodeActuator findActuator(NodeDefinition nodeDefinition) {
         switch (FlowTypeEnum.valueOf(nodeDefinition.getType())) {
             case START:
-                return new StartNode(nodeDefinition);
+                return new StartNodeActuator();
             case END:
-                return new EndNode(nodeDefinition);
+                return new EndNodeActuator();
             case USER:
-                return new UserNode(nodeDefinition);
+                return new UserNodeActuator();
             case MESSAGE:
-                return new MessageNode(nodeDefinition);
+                return new MessageNodeActuator();
             default:
                 throw new RuntimeException("存在不支持的节点类型");
         }

@@ -11,8 +11,8 @@ public interface Task {
     /**
      * 任务
      *
-     * @param flowId 流id
+     * @param nodeDefinition 流id
      */
-    void task(Long flowId);
+    void task(NodeDefinition nodeDefinition);
 
 }
