@@ -3,11 +3,24 @@
 <mapper namespace="com.cl.code.dao.AgtFlowNodeDao">
 
     <insert id="batchInsert">
-        INSERT INTO `agt_flow_node`(`node_id`, `flow_id`, `input`, `output`, `type`, `name`, `context`)
+        INSERT INTO `agt_flow_node`(`id`,`node_id`, `flow_id`, `input`, `output`, `type`, `name`, `properties`)
         VALUES
         <foreach collection="agtFlowNodeList" item="item" separator=",">
-            (#{item.nodeId},#{item.flowId},#{item.input},#{item.output},#{item.type},#{item.name},#{item.context})
+            (#{item.id},#{item.nodeId},#{item.flowId},#{item.input},#{item.output},#{item.type},#{item.name},#{item.properties})
         </foreach>
     </insert>
+
+    <select id="findNodeByFlowId" resultType="com.cl.code.model.AgtFlowNode">
+        SELECT node.node_id AS nodeId,
+               node.flow_id AS flowId,
+               node.input,
+               node.output,
+               node.type,
+               node.name,
+               node.properties
+        FROM agt_flow flow
+                 LEFT JOIN agt_flow_node node ON node.flow_id = flow.flow_id
+        WHERE flow.flow_id = #{flowId}
+    </select>
 
 </mapper>

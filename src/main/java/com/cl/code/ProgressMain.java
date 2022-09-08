@@ -1,6 +1,5 @@
 package com.cl.code;
 
-import com.cl.code.node.UserNodeActuator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -32,13 +31,19 @@ public class ProgressMain {
             throw new RuntimeException(e);
         }
 
-        UserNodeActuator bean = context.getBean(UserNodeActuator.class);
-        System.out.println(bean);
 
-        Flow flow = FlowEngine.getFlowEngine().getFlowService().buildFlow(json);
-        flow.execute();
+        Long flowId = FlowEngine.getFlowEngine().getFlowService().executeFlow(json);
+        System.out.println(flowId);
 
-        // 流程 保存
+
+//        FlowEngine.getFlowEngine().getFlowService().executeTask(6973621401651642368L, 3L, 6973621652944977920L, new SimpleGrantedOperation("agree"));
+
+        // TODO 查询执行历史记录
+
+        // TODO 用标识获取当前人员的任务
+
+        // TODO node id 策略
+
 
     }
 

@@ -4,7 +4,7 @@ package com.cl.code.constant;
  * @author chengliang
  * @date 2022/9/5 11:42
  */
-public enum FlowTaskStatusEnum {
+public enum TaskStatusEnum {
 
     /**
      * 等待
@@ -12,8 +12,13 @@ public enum FlowTaskStatusEnum {
     WAIT,
 
     /**
-     * 做
+     * 进行中
      */
-    DOING,
+    ING,
+
+    /**
+     * 完成
+     */
+    DONE,
 
 }

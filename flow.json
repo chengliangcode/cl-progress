@@ -11,7 +11,7 @@
     "name": "用户审批节点",
     "input": 1,
     "output": 3,
-    "context": {
+    "properties": {
       "user": "CL"
     }
   },
@@ -21,7 +21,7 @@
     "name": "用户审批节点",
     "input": 2,
     "output": 4,
-    "context": {
+    "properties": {
       "user": "ZZJ"
     }
   },
@@ -31,7 +31,7 @@
     "name": "抄送节点",
     "input": 3,
     "output": -1,
-    "context": {
+    "properties": {
       "user": "ZCR"
     }
   },

@@ -1,10 +1,12 @@
 package com.cl.code;
 
-import com.cl.code.service.FlowService;
+import com.cl.code.core.FlowService;
 import com.cl.code.service.TaskService;
 import org.springframework.beans.BeansException;
+import org.springframework.boot.context.event.ApplicationPreparedEvent;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,7 +14,8 @@ import org.springframework.stereotype.Component;
  * @date 2022/9/1 11:42
  */
 @Component
-public class FlowEngine implements ApplicationContextAware {
+public class FlowEngine implements ApplicationContextAware, ApplicationListener<ApplicationPreparedEvent> {
+    private static ApplicationContext applicationContext;
     private static FlowEngine flowEngine;
 
     private FlowService flowService;
@@ -38,12 +41,20 @@ public class FlowEngine implements ApplicationContextAware {
         return taskService;
     }
 
+    public static ApplicationContext getApplicationContext() {
+        return applicationContext;
+    }
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        FlowEngine.applicationContext = applicationContext;
         FlowService f = applicationContext.getBean(FlowService.class);
         TaskService t = applicationContext.getBean(TaskService.class);
         FlowEngine.flowEngine = new FlowEngine(f, t);
     }
 
-
+    @Override
+    public void onApplicationEvent(ApplicationPreparedEvent event) {
+        FlowEngine.applicationContext = event.getApplicationContext();
+    }
 }

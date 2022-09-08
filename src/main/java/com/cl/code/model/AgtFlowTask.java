@@ -9,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * 
- *
  * @author chengliang
  * @date 2022-09-05
  */
@@ -31,9 +29,23 @@ public class AgtFlowTask {
     @Column(name = "flow_id")
     private Long flowId;
 
-    @Column(name = "task_satus")
-    private Integer taskSatus;
+    @Column(name = "task_status")
+    private String taskStatus;
 
+    @Column(name = "task_type")
+    private String taskType;
+
+
+    public AgtFlowTask() {
+    }
+
+    public AgtFlowTask(Long taskId, Long nodeId, Long flowId, String taskStatus, String taskType) {
+        this.taskId = taskId;
+        this.nodeId = nodeId;
+        this.flowId = flowId;
+        this.taskStatus = taskStatus;
+        this.taskType = taskType;
+    }
 
     public static final String TASK_ID = "taskId";
 
@@ -41,6 +53,8 @@ public class AgtFlowTask {
 
     public static final String FLOW_ID = "flowId";
 
-    public static final String TASK_SATUS = "taskSatus";
+    public static final String TASK_STATUS = "taskStatus";
+
+    public static final String TASK_TYPE = "taskType";
 
 }

@@ -1,15 +1,14 @@
-package com.cl.code;
+package com.cl.code.core;
 
+import com.cl.code.property.NodeProperty;
 import lombok.Data;
-
-import java.util.Map;
 
 /**
  * @author chengliang
  * @date 2022/9/5 15:10
  */
 @Data
-public class NodeDefinition {
+public class NodeDefinition<T extends NodeProperty> {
 
     /**
      * 节点id
@@ -39,6 +38,6 @@ public class NodeDefinition {
     /**
      * 上下文
      */
-    private Map<String, Object> properties;
+    private T properties;
 
 }

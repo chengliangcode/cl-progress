@@ -29,14 +29,14 @@ public class AgtFlowRecord {
     @Column(name = "node_id")
     private Long nodeId;
 
-    @Column(name = "execute_time")
-    private Long executeTime;
+    @Column(name = "time")
+    private Long time;
 
-    public AgtFlowRecord(Long recordId, Long flowId, Long nodeId, Long executeTime) {
+    public AgtFlowRecord(Long recordId, Long flowId, Long nodeId, Long time) {
         this.recordId = recordId;
         this.flowId = flowId;
         this.nodeId = nodeId;
-        this.executeTime = executeTime;
+        this.time = time;
     }
 
     public AgtFlowRecord() {

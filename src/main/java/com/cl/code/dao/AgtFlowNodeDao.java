@@ -22,4 +22,13 @@ public interface AgtFlowNodeDao extends Mapper<AgtFlowNode> {
      */
     void batchInsert(@Param("agtFlowNodeList") List<AgtFlowNode> agtFlowNodeList);
 
+
+    /**
+     * 通过flowId 找到节点
+     *
+     * @param flowId 流id
+     * @return {@code List<AgtFlowNode>}
+     */
+    List<AgtFlowNode> findNodeByFlowId(@Param("flowId") Long flowId);
+
 }

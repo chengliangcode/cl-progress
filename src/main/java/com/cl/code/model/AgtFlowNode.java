@@ -1,10 +1,11 @@
 package com.cl.code.model;
 
 import com.alibaba.fastjson.JSON;
-import com.cl.code.NodeDefinition;
+import com.cl.code.core.NodeDefinition;
+import com.cl.code.property.NodeProperty;
+import com.cl.code.util.FlowIdUtils;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -16,13 +17,15 @@ import javax.persistence.Table;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 @Table(name = "agt_flow_node")
 public class AgtFlowNode {
 
     private static final long serialVersionUID = 1L;
 
     @Id
+    private Long id;
+
+    @Column(name = "node_id")
     private Long nodeId;
 
     @Column(name = "flow_id")
@@ -40,32 +43,23 @@ public class AgtFlowNode {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "context")
-    private String context;
-
+    @Column(name = "properties")
+    private String properties;
 
     public AgtFlowNode() {
     }
 
-    public AgtFlowNode(Long nodeId, Long flowId, Long input, Long output, String type, String name, String context) {
-        this.nodeId = nodeId;
-        this.flowId = flowId;
-        this.input = input;
-        this.output = output;
-        this.type = type;
-        this.name = name;
-        this.context = context;
-    }
-
-    public AgtFlowNode(Long flowId, NodeDefinition nodeDefinition) {
+    public AgtFlowNode(Long flowId, NodeDefinition<? extends NodeProperty> nodeDefinition) {
+        this.id = FlowIdUtils.getTwiterId();
         this.nodeId = nodeDefinition.getNodeId();
         this.flowId = flowId;
         this.input = nodeDefinition.getInput();
         this.output = nodeDefinition.getOutput();
         this.type = nodeDefinition.getType();
         this.name = nodeDefinition.getName();
-        this.context = JSON.toJSONString(nodeDefinition.getProperties());
+        if (nodeDefinition.getProperties() != null) {
+            this.properties = JSON.toJSONString(nodeDefinition.getProperties());
+        }
     }
-
 
 }
