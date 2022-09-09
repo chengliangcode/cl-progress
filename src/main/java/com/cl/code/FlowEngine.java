@@ -1,7 +1,8 @@
 package com.cl.code;
 
 import com.cl.code.core.FlowService;
-import com.cl.code.service.TaskService;
+import com.cl.code.core.HistoryService;
+import com.cl.code.core.TaskService;
 import org.springframework.beans.BeansException;
 import org.springframework.boot.context.event.ApplicationPreparedEvent;
 import org.springframework.context.ApplicationContext;
@@ -20,11 +21,12 @@ public class FlowEngine implements ApplicationContextAware, ApplicationListener<
 
     private FlowService flowService;
     private TaskService taskService;
+    private HistoryService historyService;
 
     private FlowEngine() {
     }
 
-    public FlowEngine(FlowService flowService, TaskService taskService) {
+    public FlowEngine(FlowService flowService, TaskService taskService, HistoryService historyService) {
         this.flowService = flowService;
         this.taskService = taskService;
     }
@@ -41,6 +43,10 @@ public class FlowEngine implements ApplicationContextAware, ApplicationListener<
         return taskService;
     }
 
+    public HistoryService getHistoryService() {
+        return historyService;
+    }
+
     public static ApplicationContext getApplicationContext() {
         return applicationContext;
     }
@@ -48,13 +54,18 @@ public class FlowEngine implements ApplicationContextAware, ApplicationListener<
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         FlowEngine.applicationContext = applicationContext;
+
         FlowService f = applicationContext.getBean(FlowService.class);
         TaskService t = applicationContext.getBean(TaskService.class);
-        FlowEngine.flowEngine = new FlowEngine(f, t);
+        HistoryService h = applicationContext.getBean(HistoryService.class);
+
+        FlowEngine.flowEngine = new FlowEngine(f, t, h);
+
     }
 
     @Override
     public void onApplicationEvent(ApplicationPreparedEvent event) {
         FlowEngine.applicationContext = event.getApplicationContext();
     }
+
 }

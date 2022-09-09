@@ -8,7 +8,7 @@ import com.cl.code.constant.TaskStatusEnum;
 import com.cl.code.constant.TaskTypeEnum;
 import com.cl.code.operation.GrantedOperation;
 import com.cl.code.property.NodeProperty;
-import com.cl.code.service.TaskService;
+import com.cl.code.core.TaskService;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;

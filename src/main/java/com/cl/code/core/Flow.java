@@ -1,5 +1,6 @@
 package com.cl.code.core;
 
+import com.cl.code.FlowEngine;
 import com.cl.code.actuator.NodeActuator;
 import com.cl.code.actuator.OperationTaskNodeActuator;
 import com.cl.code.operation.GrantedOperation;
@@ -40,20 +41,22 @@ public class Flow {
     }
 
     void executeTask() {
+
         // start
         NodeDefinition<? extends NodeProperty> start = getNode(START_NODE_ID);
         if (start != null) {
 
             // loop
-            loop(executeNode(start));
+            NodeDefinition<? extends NodeProperty> next = loop(executeNode(start));
 
-            // TODO 是否要执行结束节点
-
-            // end
-            NodeDefinition<? extends NodeProperty> end = getNode(END_NODE_ID);
-            if (end != null) {
-                executeNode(end);
+            if (next != null && END_NODE_ID.equals(next.getNodeId())) {
+                // end
+                NodeDefinition<? extends NodeProperty> end = getNode(END_NODE_ID);
+                if (end != null) {
+                    executeNode(end);
+                }
             }
+
         }
     }
 
@@ -70,6 +73,7 @@ public class Flow {
 
         // 执行下次并循环
         loop(getNode(next));
+
     }
 
     private NodeDefinition<? extends NodeProperty> loop(NodeDefinition<? extends NodeProperty> nodeDefinition) {
@@ -86,10 +90,11 @@ public class Flow {
     @SuppressWarnings("all")
     private NodeDefinition<? extends NodeProperty> executeNode(NodeDefinition nodeDefinition) {
         NodeActuator<? extends NodeType<?>, ? extends NodeProperty> actuator = FlowBuildUtils.findActuator(nodeDefinition);
-        // TODO 记录执行
-        log.info("执行节点" + nodeDefinition.getType());
+        // 记录历史
+        FlowEngine.getFlowEngine().getHistoryService().saveHistory(flowId, nodeDefinition.getNodeId());
         Long next = actuator.execute(nodeDefinition, this);
         return getNode(next);
     }
+
 
 }

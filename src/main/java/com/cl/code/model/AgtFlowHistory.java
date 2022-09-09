@@ -15,13 +15,13 @@ import javax.persistence.Table;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@Table(name = "agt_flow_record")
-public class AgtFlowRecord {
+@Table(name = "agt_flow_history")
+public class AgtFlowHistory {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    private Long recordId;
+    private Long historyId;
 
     @Column(name = "flow_id")
     private Long flowId;
@@ -32,13 +32,13 @@ public class AgtFlowRecord {
     @Column(name = "time")
     private Long time;
 
-    public AgtFlowRecord(Long recordId, Long flowId, Long nodeId, Long time) {
-        this.recordId = recordId;
+    public AgtFlowHistory(Long historyId, Long flowId, Long nodeId, Long time) {
+        this.historyId = historyId;
         this.flowId = flowId;
         this.nodeId = nodeId;
         this.time = time;
     }
 
-    public AgtFlowRecord() {
+    public AgtFlowHistory() {
     }
 }
