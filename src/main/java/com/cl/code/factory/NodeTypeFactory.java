@@ -17,7 +17,10 @@ public class NodeTypeFactory {
 
     public static void register(String key, NodeType<? extends NodeProperty> nodeType) {
         if (nodeType == null || !StringUtils.hasText(nodeType.getType())) {
-            throw new RuntimeException(" node actuator register error !!");
+            throw new RuntimeException("node type register error !!");
+        }
+        if (NODE_TYPE_MAP.containsKey(key)) {
+            throw new RuntimeException("node type \"" + key + "\" " + "already exist");
         }
         NODE_TYPE_MAP.put(key, nodeType);
     }

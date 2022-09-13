@@ -29,16 +29,13 @@ public class AgtFlowHistory {
     @Column(name = "node_id")
     private Long nodeId;
 
+    @Column(name = "node_result")
+    private String nodeResult;
+
     @Column(name = "time")
     private Long time;
 
-    public AgtFlowHistory(Long historyId, Long flowId, Long nodeId, Long time) {
-        this.historyId = historyId;
-        this.flowId = flowId;
-        this.nodeId = nodeId;
-        this.time = time;
-    }
-
     public AgtFlowHistory() {
     }
+
 }

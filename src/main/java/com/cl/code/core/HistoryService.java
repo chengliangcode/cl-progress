@@ -19,12 +19,13 @@ public class HistoryService {
     private AgtFlowHistoryDao agtFlowHistoryDao;
 
     @Transactional(rollbackFor = Exception.class)
-    public void saveHistory(Long flowId, Long nodeId) {
+    public void saveHistory(Long flowId, Long nodeId, String nodeResult) {
         Long historyId = FlowIdUtils.getTwiterId();
         AgtFlowHistory history = new AgtFlowHistory();
         history.setHistoryId(historyId);
         history.setFlowId(flowId);
         history.setNodeId(nodeId);
+        history.setNodeResult(nodeResult);
         history.setTime(System.currentTimeMillis());
         agtFlowHistoryDao.insert(history);
 

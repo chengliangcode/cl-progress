@@ -1,11 +1,13 @@
 package com.cl.code.actuator;
 
-import com.cl.code.core.Flow;
 import com.cl.code.FlowEngine;
-import com.cl.code.core.NodeDefinition;
-import com.cl.code.core.NodeType;
+import com.cl.code.constant.NodeResultEnum;
 import com.cl.code.constant.TaskStatusEnum;
 import com.cl.code.constant.TaskTypeEnum;
+import com.cl.code.core.Flow;
+import com.cl.code.core.NodeDefinition;
+import com.cl.code.core.NodeResult;
+import com.cl.code.core.NodeType;
 import com.cl.code.property.NodeProperty;
 import org.springframework.stereotype.Component;
 
@@ -24,10 +26,10 @@ public abstract class AutoTaskNodeActuator<T extends NodeType<V>, V extends Node
     }
 
     @Override
-    public Long task(NodeDefinition<V> nodeDefinition, Flow flow, Long taskId) {
+    public NodeResult task(NodeDefinition<V> nodeDefinition, Flow flow, Long taskId) {
         this.autoTask(nodeDefinition);
         FlowEngine.getFlowEngine().getTaskService().updateTask(flow.getFlowId(), nodeDefinition.getNodeId(), taskId, TaskStatusEnum.DONE);
-        return nodeDefinition.getOutput();
+        return NodeResultEnum.DONE;
     }
 
     /**

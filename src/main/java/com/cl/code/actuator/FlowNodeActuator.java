@@ -1,6 +1,7 @@
 package com.cl.code.actuator;
 
 import com.cl.code.FlowEngine;
+import com.cl.code.core.NodeActuator;
 import com.cl.code.core.NodeType;
 import com.cl.code.factory.NodeActuatorFactory;
 import com.cl.code.property.NodeProperty;

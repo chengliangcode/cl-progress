@@ -1,8 +1,8 @@
 package com.cl.code;
 
+import com.cl.code.operation.SimpleGrantedOperation;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 public class ProgressMain {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(ProgressMain.class, args);
+        SpringApplication.run(ProgressMain.class, args);
         String json;
         try {
             InputStream is = Files.newInputStream(Paths.get("flow.json"));
@@ -30,13 +30,11 @@ public class ProgressMain {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+//
+//        Long flowId = FlowEngine.getFlowEngine().getFlowService().executeFlow(json);
+//        System.out.println(flowId);
 
-
-        Long flowId = FlowEngine.getFlowEngine().getFlowService().executeFlow(json);
-        System.out.println(flowId);
-
-
-//        FlowEngine.getFlowEngine().getFlowService().executeTask(6973621401651642368L, 3L, 6973621652944977920L, new SimpleGrantedOperation("agree"));
+        FlowEngine.getFlowEngine().getFlowService().executeTask(6975346865135026176L, 3L, 6975347028683522048L, new SimpleGrantedOperation("agree"), null);
 
         // TODO 查询执行历史记录
 

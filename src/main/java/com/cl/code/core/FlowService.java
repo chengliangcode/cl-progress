@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -37,9 +38,9 @@ public class FlowService {
         return flowId;
     }
 
-    public void executeTask(Long flowId, Long nodeId, Long taskId, GrantedOperation operation) {
+    public void executeTask(Long flowId, Long nodeId, Long taskId, GrantedOperation operation, Map<String, Object> context) {
         Flow flow = findFlow(flowId);
-        flow.executeTask(nodeId, taskId, operation);
+        flow.executeTask(nodeId, taskId, operation, context);
     }
 
     private Flow findFlow(Long flowId) {

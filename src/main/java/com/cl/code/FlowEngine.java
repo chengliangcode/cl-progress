@@ -29,6 +29,7 @@ public class FlowEngine implements ApplicationContextAware, ApplicationListener<
     public FlowEngine(FlowService flowService, TaskService taskService, HistoryService historyService) {
         this.flowService = flowService;
         this.taskService = taskService;
+        this.historyService = historyService;
     }
 
     public static FlowEngine getFlowEngine() {

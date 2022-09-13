@@ -17,10 +17,11 @@ public abstract class TaskNodeActuator<T extends NodeType<V>, V extends NodeProp
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public Long execute(NodeDefinition<V> nodeDefinition, Flow flow) {
+    public NodeResult execute(NodeDefinition<V> nodeDefinition, Flow flow) {
         // 创建任务
         Long taskId = FlowEngine.getFlowEngine().getTaskService().createTask(flow.getFlowId(), nodeDefinition.getNodeId(), type());
         return this.task(nodeDefinition, flow, taskId);
+
     }
 
 

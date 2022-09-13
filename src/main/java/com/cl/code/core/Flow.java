@@ -1,8 +1,8 @@
 package com.cl.code.core;
 
 import com.cl.code.FlowEngine;
-import com.cl.code.actuator.NodeActuator;
 import com.cl.code.actuator.OperationTaskNodeActuator;
+import com.cl.code.constant.NodeResultEnum;
 import com.cl.code.operation.GrantedOperation;
 import com.cl.code.property.NodeProperty;
 import com.cl.code.util.FlowBuildUtils;
@@ -61,7 +61,7 @@ public class Flow {
     }
 
     @SuppressWarnings("all")
-    void executeTask(Long nodeId, Long taskId, GrantedOperation operation) {
+    void executeTask(Long nodeId, Long taskId, GrantedOperation operation, Map<String, Object> context) {
         // 是否为当前节点
 
         // 查找 node
@@ -69,8 +69,8 @@ public class Flow {
         OperationTaskNodeActuator<? extends NodeType<?>, ? extends NodeProperty> operationTaskNodeActuator = (OperationTaskNodeActuator<? extends NodeType<?>, ? extends NodeProperty>) FlowBuildUtils.findActuator(nodeDefinition);
 
         // 触发操作
-        Long next = operationTaskNodeActuator.operationTrigger(nodeDefinition, this, taskId, operation);
-
+        Long next = operationTaskNodeActuator.operationTrigger(nodeDefinition, this, taskId, operation, context);
+        FlowEngine.getFlowEngine().getHistoryService().saveHistory(flowId, nodeDefinition.getNodeId(), result);
         // 执行下次并循环
         loop(getNode(next));
 
@@ -91,9 +91,18 @@ public class Flow {
     private NodeDefinition<? extends NodeProperty> executeNode(NodeDefinition nodeDefinition) {
         NodeActuator<? extends NodeType<?>, ? extends NodeProperty> actuator = FlowBuildUtils.findActuator(nodeDefinition);
         // 记录历史
-        FlowEngine.getFlowEngine().getHistoryService().saveHistory(flowId, nodeDefinition.getNodeId());
-        Long next = actuator.execute(nodeDefinition, this);
-        return getNode(next);
+        NodeResult nodeResult = actuator.execute(nodeDefinition, this);
+        String result = nodeResult.result();
+        FlowEngine.getFlowEngine().getHistoryService().saveHistory(flowId, nodeDefinition.getNodeId(), result);
+        if (NodeResultEnum.DONE.result().equals(result)) {
+            return getNode(nodeDefinition.getOutput());
+        } else if (NodeResultEnum.ING.result().equals(result)) {
+            return null;
+        } else if (NodeResultEnum.RETURN.result().equals(result)) {
+            // 退回
+            return null;
+        }
+        throw new RuntimeException("不支持该返回结果");
     }
 
 

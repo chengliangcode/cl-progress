@@ -1,8 +1,5 @@
-package com.cl.code.actuator;
+package com.cl.code.core;
 
-import com.cl.code.core.Flow;
-import com.cl.code.core.NodeDefinition;
-import com.cl.code.core.NodeType;
 import com.cl.code.property.NodeProperty;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -19,7 +16,7 @@ public interface NodeActuator<T extends NodeType<V>, V extends NodeProperty> ext
      * @param flow           流
      * @return {@code Long}
      */
-    Long execute(NodeDefinition<V> nodeDefinition, Flow flow);
+    NodeResult execute(NodeDefinition<V> nodeDefinition, Flow flow);
 
 
 }

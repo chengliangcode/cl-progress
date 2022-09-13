@@ -1,7 +1,9 @@
 package com.cl.code.actuator;
 
+import com.cl.code.constant.NodeResultEnum;
 import com.cl.code.core.Flow;
 import com.cl.code.core.NodeDefinition;
+import com.cl.code.core.NodeResult;
 import com.cl.code.node.EndNode;
 import com.cl.code.property.NullProperty;
 import org.springframework.stereotype.Component;
@@ -14,8 +16,8 @@ import org.springframework.stereotype.Component;
 public class EndNodeActuator extends FlowNodeActuator<EndNode, NullProperty> {
 
     @Override
-    public Long execute(NodeDefinition<NullProperty> nodeDefinition, Flow flow) {
-        return null;
+    public NodeResult execute(NodeDefinition<NullProperty> nodeDefinition, Flow flow) {
+        return NodeResultEnum.DONE;
     }
 
 }

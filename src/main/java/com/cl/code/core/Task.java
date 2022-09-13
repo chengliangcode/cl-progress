@@ -1,8 +1,6 @@
 package com.cl.code.core;
 
 import com.cl.code.constant.TaskTypeEnum;
-import com.cl.code.core.Flow;
-import com.cl.code.core.NodeDefinition;
 import com.cl.code.property.NodeProperty;
 
 /**
@@ -26,9 +24,9 @@ public interface Task<V extends NodeProperty> {
      * @param nodeDefinition 节点定义
      * @param flow           流
      * @param taskId         taskId
-     * @return {@code Long}
+     * @return {@code NodeResult}
      */
-    Long task(NodeDefinition<V> nodeDefinition, Flow flow, Long taskId);
+    NodeResult task(NodeDefinition<V> nodeDefinition, Flow flow, Long taskId);
 
 
 }

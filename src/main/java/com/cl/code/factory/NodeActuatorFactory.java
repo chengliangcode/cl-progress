@@ -1,6 +1,6 @@
 package com.cl.code.factory;
 
-import com.cl.code.actuator.NodeActuator;
+import com.cl.code.core.NodeActuator;
 import com.cl.code.core.NodeType;
 import com.cl.code.property.NodeProperty;
 import org.springframework.util.StringUtils;
@@ -21,6 +21,11 @@ public class NodeActuatorFactory {
         if (!StringUtils.hasText(nodeType) || nodeActuator == null) {
             throw new RuntimeException(" node actuator register error !!");
         }
+
+        if (NODE_ACTUATOR_MAP.containsKey(nodeType)) {
+            throw new RuntimeException("node type \"" + nodeType + "\"" + "already exist");
+        }
+
         NODE_ACTUATOR_MAP.put(nodeType, nodeActuator);
     }
 
@@ -34,6 +39,5 @@ public class NodeActuatorFactory {
         }
         return nodeActuator;
     }
-
 
 }
