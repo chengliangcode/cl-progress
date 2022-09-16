@@ -69,10 +69,24 @@ public class Flow {
         OperationTaskNodeActuator<? extends NodeType<?>, ? extends NodeProperty> operationTaskNodeActuator = (OperationTaskNodeActuator<? extends NodeType<?>, ? extends NodeProperty>) FlowBuildUtils.findActuator(nodeDefinition);
 
         // 触发操作
-        Long next = operationTaskNodeActuator.operationTrigger(nodeDefinition, this, taskId, operation, context);
-        FlowEngine.getFlowEngine().getHistoryService().saveHistory(flowId, nodeDefinition.getNodeId(), result);
-        // 执行下次并循环
-        loop(getNode(next));
+        NodeResult nodeResult = operationTaskNodeActuator.operationTrigger(nodeDefinition, this, taskId, operation, context);
+
+        FlowEngine.getFlowEngine().getHistoryService().saveHistory(flowId, nodeDefinition.getNodeId(), nodeResult.result());
+
+        Long next = null;
+        // 先不考虑
+        if (NodeResultEnum.DONE.result().equals(nodeResult.result())) {
+            next = nodeDefinition.getOutput();
+        } else if (NodeResultEnum.RETURN.result().equals(nodeResult.result())) {
+            next = nodeDefinition.getInput();
+        } else {
+
+        }
+        if (next != null) {
+            // 执行下次并循环
+            loop(getNode(next));
+        }
+
 
     }
 
@@ -104,6 +118,5 @@ public class Flow {
         }
         throw new RuntimeException("不支持该返回结果");
     }
-
 
 }

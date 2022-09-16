@@ -28,8 +28,10 @@ public enum NodeResultEnum implements NodeResult {
     RETURN,
     ;
 
+
     @Override
     public String result() {
         return super.name();
     }
+
 }

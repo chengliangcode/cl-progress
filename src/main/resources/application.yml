@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://116.205.188.28:3306/progress?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+  activiti:
+    database-schema-update: true
+    check-process-definitions: false
+    db-history-used: true
+    history-level: full

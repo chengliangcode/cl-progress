@@ -1,8 +1,10 @@
 package com.cl.code.actuator;
 
+import com.cl.code.constant.NodeResultEnum;
 import com.cl.code.constant.TaskStatusEnum;
 import com.cl.code.core.Flow;
 import com.cl.code.core.NodeDefinition;
+import com.cl.code.core.OperationResult;
 import com.cl.code.node.UserNode;
 import com.cl.code.operation.GrantedOperation;
 import com.cl.code.operation.SimpleGrantedOperation;
@@ -34,7 +36,7 @@ public class UserNodeActuator extends OperationTaskNodeActuator<UserNode, UserPr
     }
 
     @Override
-    protected TaskStatusEnum operationTrigger(NodeDefinition<UserProperty> nodeDefinition, Flow flow, GrantedOperation grantedOperation, Map<String, Object> context) {
+    protected OperationResult operationTrigger(NodeDefinition<UserProperty> nodeDefinition, Flow flow, GrantedOperation grantedOperation, Map<String, Object> context) {
         // 继续 退回 暂停
         // 审批 退回 转审 或签 会签
         // 一个用户的操作进来 我要根据操作来 返回现在节点的状态
@@ -45,7 +47,7 @@ public class UserNodeActuator extends OperationTaskNodeActuator<UserNode, UserPr
 
         // 转审 是节点的状态还是任务的状态?
 
-        return TaskStatusEnum.DONE;
+        return OperationResult.build(NodeResultEnum.DONE, TaskStatusEnum.ING);
     }
 
 }
